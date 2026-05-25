@@ -114,9 +114,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!animateCounter.startTime) animateCounter.startTime = timestamp;
       const progress = Math.min((timestamp - animateCounter.startTime) / duration, 1);
       const value = Math.floor(progress * target);
-      el.textContent = value.toLocaleString('en-IN') + suffix;
+      el.textContent = (target < 10000 && target > 1000 ? value.toString() : value.toLocaleString('en-IN')) + suffix;
       if (progress < 1) requestAnimationFrame(step);
-      else { animateCounter.startTime = null; el.textContent = target.toLocaleString('en-IN') + suffix; }
+      else { animateCounter.startTime = null; el.textContent = (target < 10000 && target > 1000 ? target.toString() : target.toLocaleString('en-IN')) + suffix; }
     };
     requestAnimationFrame(step);
   }
@@ -124,8 +124,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const statsSection = document.querySelector('.stats-bar');
   if (statsSection && 'IntersectionObserver' in window) {
     const statsItems = statsSection.querySelectorAll('.stat-number');
-    const targets = [2024, 30, 50000, 1200, 7];
-    const suffixes = ['', '', '+', '+', ''];
+    const targets = [2026, 28, 50000, 1200, 7];
+    const suffixes = ['', '+', '+', '+', ''];
 
     const statsObserver = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
