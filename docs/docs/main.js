@@ -143,26 +143,59 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ── Join Form handler ──
-function handleJoinSubmit(e) {
+const JOIN_FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxpkAexj8K6t3vrwt-zXgKKf28DUZVeRHd39hxGy0tFZkeCApwkFLWIgx_BOPGvSRU8/exec';
+
+async function handleJoinSubmit(e) {
   e.preventDefault();
 
-  // Basic validation
+  const form = document.getElementById('joinForm');
+  const success = document.getElementById('joinSuccess');
+  const submitButton = form?.querySelector('button[type=submit]');
   const phone = document.getElementById('phone')?.value || '';
+
   if (!/^[6-9][0-9]{9}$/.test(phone)) {
-    alert('Please enter a valid 10-digit Indian mobile number.');
+    alert('ದಯವಿಟ್ಟು ಸರಿಯಾದ 10 ಅಂಕೆಯ ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯನ್ನು ನಮೂದಿಸಿ.');
     return;
   }
 
-  // In production, this would POST to a backend API.
-  // For now, show the success message.
-  const form = document.getElementById('joinForm');
-  const success = document.getElementById('joinSuccess');
-  if (form && success) {
-    // Hide the submit button and show success
-    form.querySelectorAll('input, select, textarea, button[type=submit]').forEach(el => {
-      el.disabled = true;
+  if (!JOIN_FORM_ENDPOINT) {
+    alert('Google Sheet endpoint is not connected yet.');
+    return;
+  }
+
+  const formData = new URLSearchParams();
+  formData.append('fullName', document.getElementById('fullName')?.value.trim() || '');
+  formData.append('phone', phone.trim());
+  formData.append('district', document.getElementById('district')?.value || '');
+  formData.append('taluk', document.getElementById('taluk')?.value.trim() || '');
+  formData.append('source', window.location.href);
+
+  if (submitButton) {
+    submitButton.disabled = true;
+    submitButton.dataset.originalText = submitButton.textContent;
+    submitButton.textContent = 'ಸಲ್ಲಿಸಲಾಗುತ್ತಿದೆ...';
+  }
+
+  try {
+    await fetch(JOIN_FORM_ENDPOINT, {
+      method: 'POST',
+      mode: 'no-cors',
+      body: formData
     });
-    success.style.display = 'block';
-    success.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+    if (form && success) {
+      form.querySelectorAll('input, select, textarea, button[type=submit]').forEach(el => {
+        el.disabled = true;
+      });
+      success.style.display = 'block';
+      success.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  } catch (error) {
+    console.error('Join form submission failed:', error);
+    alert('ಸಲ್ಲಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ. ದಯವಿಟ್ಟು ಸ್ವಲ್ಪ ಸಮಯದ ನಂತರ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.');
+    if (submitButton) {
+      submitButton.disabled = false;
+      submitButton.textContent = submitButton.dataset.originalText || 'ಸೇರ್ಪಡೆಗೊಳ್ಳಿ';
+    }
   }
 }
