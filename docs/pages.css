@@ -336,7 +336,10 @@
 /* ── Join Page ── */
 .join-page-section {
   padding: 6rem 8vw;
-  background: var(--white);
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.92) 0%, rgba(255,255,255,.82) 46%, rgba(255,255,255,.48) 100%),
+    url('assets/party-logo-bg.jpg') right -4vw top 85px / min(760px, 58vw) auto no-repeat,
+    var(--white);
   position: relative;
   overflow: hidden;
 }
@@ -344,13 +347,9 @@
   content: '';
   position: absolute;
   inset: 0;
-  background-image:
-    linear-gradient(90deg, rgba(255,255,255,.96) 0%, rgba(255,255,255,.88) 46%, rgba(255,255,255,.72) 100%),
-    url('assets/party-logo-bg.jpg');
-  background-position: center, right -5vw center;
-  background-repeat: no-repeat;
-  background-size: cover, min(680px, 62vw);
-  opacity: .9;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(255,184,0,.12), transparent 34%),
+    radial-gradient(circle at 82% 28%, rgba(255,109,0,.16), transparent 38%);
   pointer-events: none;
 }
 .join-intro {
@@ -454,6 +453,12 @@
   .leaders-full-grid { grid-template-columns: 1fr 1fr; }
   .events-full-list { grid-template-columns: 1fr 1fr; }
   .join-intro { grid-template-columns: 1fr; gap: 2.5rem; }
+  .join-page-section {
+    background:
+      linear-gradient(180deg, rgba(255,255,255,.84) 0%, rgba(255,255,255,.94) 50%, rgba(255,255,255,.98) 100%),
+      url('assets/party-logo-bg.jpg') center 92px / min(560px, 100vw) auto no-repeat,
+      var(--white);
+  }
   .roles-grid { grid-template-columns: 1fr 1fr; }
   .promises-row { grid-template-columns: 1fr 1fr; }
 }
