@@ -337,8 +337,25 @@
 .join-page-section {
   padding: 6rem 8vw;
   background: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+.join-page-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(90deg, rgba(255,255,255,.96) 0%, rgba(255,255,255,.88) 46%, rgba(255,255,255,.72) 100%),
+    url('assets/party-logo-bg.jpg');
+  background-position: center, right -5vw center;
+  background-repeat: no-repeat;
+  background-size: cover, min(680px, 62vw);
+  opacity: .9;
+  pointer-events: none;
 }
 .join-intro {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 5rem;
