@@ -337,8 +337,8 @@
 .join-page-section {
   padding: 6rem 8vw;
   background:
-    linear-gradient(90deg, rgba(255,255,255,.92) 0%, rgba(255,255,255,.82) 46%, rgba(255,255,255,.48) 100%),
-    url('assets/party-logo-bg.jpg') right -4vw top 85px / min(760px, 58vw) auto no-repeat,
+    linear-gradient(90deg, rgba(255,255,255,.86) 0%, rgba(255,255,255,.70) 46%, rgba(255,255,255,.28) 100%),
+    url('assets/party-logo-bg.jpg') right -2vw top 70px / min(860px, 64vw) auto no-repeat,
     var(--white);
   position: relative;
   overflow: hidden;
@@ -462,8 +462,8 @@
   .join-intro { grid-template-columns: 1fr; gap: 2.5rem; }
   .join-page-section {
     background:
-      linear-gradient(180deg, rgba(255,255,255,.84) 0%, rgba(255,255,255,.94) 50%, rgba(255,255,255,.98) 100%),
-      url('assets/party-logo-bg.jpg') center 92px / min(560px, 100vw) auto no-repeat,
+      linear-gradient(180deg, rgba(255,255,255,.74) 0%, rgba(255,255,255,.88) 52%, rgba(255,255,255,.96) 100%),
+      url('assets/party-logo-bg.jpg') center 82px / min(640px, 112vw) auto no-repeat,
       var(--white);
   }
   .roles-grid { grid-template-columns: 1fr 1fr; }
